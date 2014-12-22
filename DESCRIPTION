@@ -1,8 +1,8 @@
 Package: twinspan
 Type: Package
 Title: Calculates TWINSPAN (TWo-way INdicator SPecies ANalysis) and also its modified version. 
-Version: 0.3
-Date: 2014-07-25
+Version: 0.4
+Date: 2014-12-22
 Author: David Zeleny (basically only R wrapper around twinspan.exe file written
     by M.O.Hill). Modified TWINSPAN is according to Rolecek et al. 2009.
 Maintainer: David Zeleny <zeleny.david@gmail.com>
