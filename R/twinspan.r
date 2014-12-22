@@ -13,7 +13,7 @@
 #' @param min.diss Minimum dissimilarity under which the cluster will not be divided further (default = NULL, which means that the stopping rule is based on number of clusters (parameter \code{no.clusters})). Currently not implemented.
 #' @param mean.median Should be the average dissimilarity of cluster calculated as mean or median of all between sample dissimilarities within the cluster? (default = \code{'mean'}, alternative is \code{'median'})
 #' @param ... Other (rarely used) TWINSPAN parameters passed into function \code{\link{create.tw.dat}}
-#' @details XXX
+#' @details XXXX
 #' @return \code{twinspan} returns object of the class \code{'tw'}, which has \code{plot} and \code{summary} methods.
 #' @references \itemize{
 #' \item Hill M.O. (1979): TWINSPAN - A FORTRAN program for arranging multivariate data in an ordered two-way table by classification of the individuals and attributes. Section of Ecology and Systematics, Cornel University, Ithaca, New York. 
