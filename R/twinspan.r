@@ -20,14 +20,19 @@
 #' \item Rolecek J., Tichy L., Zeleny D. & Chytry M. (2009): Modified TWINSPAN classification in which the hierarchy respects cluster heterogeneity. Journal of Vegetation Science, 20: 596-602.
 #' }
 #' @examples
-#' library (vegan)
-#' data (BCI)
-#' res <- twinspan (BCI, modif = TRUE, no.clusters = 5, diss = 'bray')
+#' data (danube)
+#' res <- twinspan (danube$spe, modif = TRUE, no.clusters = 4)
 #' k <- cutree.tw (res)
-#' dca <- decorana (BCI)
-#' ordiplot (dca, type = 'n', display = 'si')
+#' dca <- decorana (danube$spe)
+#' par (mfrow = c(1,2))
+#' ordiplot (dca, type = 'n', display = 'si', main = 'Modified TWINSPAN')
 #' points (dca, col = k)
-#' for (i in unique (k)) ordihull (dca, groups = k, show.group = i, col = i,
+#' for (i in c(1,2,4)) ordihull (dca, groups = k, show.group = i, col = i,
+#'  draw = 'polygon', label = TRUE)
+#' ordiplot (dca, type = 'n', display = 'si', main = 'Original assignment\n (Ellenberg 1954)')
+#' points (dca, col = danube$env$veg.type)
+#' for (i in c(1:3)) ordihull (dca, groups = danube$env$veg.type, 
+#'  show.group = unique (danube$env$veg.type)[i], col = i,
 #'  draw = 'polygon', label = TRUE)
 
 #' @seealso \code{\link{cutree.tw}}, \code{\link{create.tw.dat}}
