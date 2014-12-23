@@ -6,11 +6,10 @@
 \usage{
 create.tw.dat(input.file = "tw.cc!", omit.samples = -1,
   no.cut.levels = length(cut.levels), cut.levels = c(0, 2, 5, 10, 20),
-  min.group.size = 5, max.no.ind = 7, max.no.sp.table = 100,
-  divisions = 6, long.output = 1, diagram = 0,
-  machine.readable.output = 1, pseudosp.weights = -1,
-  indicator.potential = -1, ommited.species = -1, samples.weights = -1,
-  species.weights = -1)
+  min.group.size = 5, max.no.ind = 7, max.no.sp.table = 100, levels = 6,
+  long.output = 1, diagram = 0, machine.readable.output = 1,
+  pseudosp.weights = -1, indicator.potential = -1, ommited.species = -1,
+  samples.weights = -1, species.weights = -1)
 }
 \arguments{
 \item{input.file}{Input file with data (default = \code{"tw.cc!"}, should not be changed).}
@@ -27,7 +26,7 @@ create.tw.dat(input.file = "tw.cc!", omit.samples = -1,
 
 \item{max.no.sp.table}{Maximum number of species in the output table stored in \code{tw.TWI} file (default = 100, should be between 0 and 1000).}
 
-\item{divisions}{Number of hierarchical divisions (default = 6, should be between 0 and 15).}
+\item{levels}{Number of hierarchical levels of divisions (default = 6, should be between 0 and 15).}
 
 \item{long.output}{Should the long output be produced? (default = 1, means yes)}
 

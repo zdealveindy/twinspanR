@@ -12,9 +12,9 @@
 #' @export
   cutree.tw <- function (tw, level = NULL, long.output = F)
 {
-  if (is.null (level)) level <- max (unlist (lapply (as.character (tw$class), FUN = function (x) length (unlist (strsplit (x, split = ''))))))-1
-  tw.class.level <- as.factor (unlist (lapply (as.character (tw$class), FUN = function (x) substr (x, start = 1, stop = level + 1))))
-  plot.no <- tw$plot.no
+  if (is.null (level)) level <- max (unlist (lapply (as.character (tw$classif$class), FUN = function (x) length (unlist (strsplit (x, split = ''))))))-1
+  tw.class.level <- as.factor (unlist (lapply (as.character (tw$classif$class), FUN = function (x) substr (x, start = 1, stop = level + 1))))
+  plot.no <- tw$classif$plot.no
   group <- as.numeric (tw.class.level)
   class <- tw.class.level
   if (long.output) res <- as.data.frame (list (plot.no = plot.no, group = group, class = class)) else res <- group
