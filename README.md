@@ -1,4 +1,0 @@
-twinspan
-========
-
-TWINSPAN in R

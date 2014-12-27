@@ -14,7 +14,13 @@
 #' @param mean.median Should be the average dissimilarity of cluster calculated as mean or median of all between sample dissimilarities within the cluster? (default = \code{'mean'}, alternative is \code{'median'})
 #' @param ... Other (rarely used) TWINSPAN parameters passed into function \code{\link{create.tw.dat}}
 #' @details XXXXX
-#' @return \code{twinspan} returns object of the class \code{'tw'}, which has \code{plot} and \code{summary} methods.
+#' @return \code{twinspan} returns object of the class \code{'tw'}, which is a list with the following items:
+#' \itemize{
+#' \item \code{classif} data frame with three columns: \code{order} - sequential number of plot, \code{plot.no} - original number of plot (\code{row.names} in community matrix \code{com}), \code{class} - binomial code with hieararchical result of TWINSPAN classification.
+#' \item \code{twi} vector (if \code{modif = FALSE}) or list (if \code{modif = TRUE}) of complete machine-readable output of TWINSPAN algorithm read from *.TWI file. In case of modified TWINSPAN (\code{modif = TRUE}) it is a list with number of items equals to number of clusters.
+#' \item \code{spnames} data frame with two columns: \code{full.name} - full scientific species name (\code{names (com)}), \code{abbrev.name} - eight-digits abbreviation created by \code{make.cepnames} function from \code{vegan}.
+#' \item \code{modif} logical; was the result calculated using standard TWINSPAN (\code{modif = FALSE}) or its modified version (\code{modif = TRUE})?
+#' }
 #' @references \itemize{
 #' \item Hill M.O. (1979): TWINSPAN - A FORTRAN program for arranging multivariate data in an ordered two-way table by classification of the individuals and attributes. Section of Ecology and Systematics, Cornel University, Ithaca, New York. 
 #' \item Rolecek J., Tichy L., Zeleny D. & Chytry M. (2009): Modified TWINSPAN classification in which the hierarchy respects cluster heterogeneity. Journal of Vegetation Science, 20: 596-602.
@@ -22,7 +28,7 @@
 #' @examples
 #' data (danube)
 #' res <- twinspan (danube$spe, modif = TRUE, clusters = 4)
-#' k <- cutree.tw (res)
+#' k <- cut (res)
 #' dca <- decorana (danube$spe)
 #' par (mfrow = c(1,2))
 #' ordiplot (dca, type = 'n', display = 'si', main = 'Modified TWINSPAN')
@@ -35,8 +41,10 @@
 #'  show.group = unique (danube$env$veg.type)[i], col = i,
 #'  draw = 'polygon', label = TRUE)
 
-#' @seealso \code{\link{cutree.tw}}, \code{\link{create.tw.dat}}
+#' @seealso \code{\link{cut.tw}}, \code{\link{create.tw.dat}}
 
+#' @importFrom rioja write.CEP
+#' @importFrom vegan make.cepnames cca vegdist
 #' @export
 twinspan <- function (com, modif = F, cut.levels = c(0,2,5,10,20), min.group.size = 5, levels = 6, clusters = 5, diss = 'bray', min.diss = NULL, mean.median = 'mean', ...)
 {
@@ -55,7 +63,7 @@ twinspan <- function (com, modif = F, cut.levels = c(0,2,5,10,20), min.group.siz
    tw.temp <- list ()
    tw <- list ()
    tw.temp[[1]] <- twinspan0 (com, cut.levels = cut.levels, min.group.size = min.group.size, levels = 1)
-   groups01[,1] <- cutree.tw (tw.temp[[1]], level = 1)-1
+   groups01[,1] <- cut (tw.temp[[1]], level = 1)-1
    clusters.temp <- 2
    while (clusters.temp != clusters)
    {
@@ -80,75 +88,9 @@ twinspan <- function (com, modif = F, cut.levels = c(0,2,5,10,20), min.group.siz
    class (tw) <- c('tw')
    tw$twi <- lapply (tw.temp, FUN = function (x) x$twi)
  }
- tw$spnames <- cbind (full.name = species.names, abbrev.name = vegan::make.cepnames (species.names))
+ tw$spnames <- as.data.frame (cbind (full.name = species.names, abbrev.name = vegan::make.cepnames (species.names)))
  tw$modif <- modif
  return (tw)
-}
-
-#' @export
-names.tw <- function (tw) tw$spnames
-
-#' @export
-print.tw <- function (tw) print (tw$classif)
-
-#' @export
-print.twi <- function (tw, clusters = NULL) 
-  {
-  if (!tw$modif & !is.null (clusters)) warning ("Argument 'clusters' is ignored, because it is relevant only for modified TWINSPAN (but you have calculated standard TWINSPAN)")
-  if (tw$modif & !is.null (clusters))
-    if (max (clusters) > length (tw$twi)+1 || clusters < 2) stop (paste ("Values in argument 'clusters' must be between 2 and ", length (tw$twi)+1, ".", sep = ''))
-  twi <- tw$twi
-  if (tw$modif == FALSE) 
-    {
-    twi <- read.twi (twi)
-    cat (unlist (twi), sep = '\n')
-    }
-  if (tw$modif == TRUE)
-    {
-    temp <- lapply (X = if (is.null (clusters)) 2:(length (twi)+1) else clusters, FUN = function (l) 
-      {
-      twi <- read.twi (twi[[l-1]])
-      cat (' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', sep = '\n')
-      cat (paste (' Modified TWINSPAN - step ',l-1, ' (', l,' clusters)', sep = ''), sep = '\n')
-      cat (unlist (twi), sep = '\n')
-      })
-    }
-  }
-
-#' @export
-print.table  <- function (tw, clusters = NULL)
-{
-  if (!tw$modif & !is.null (clusters)) warning ("Argument 'clusters' is ignored, because it is relevant only for modified TWINSPAN (but you have calculated standard TWINSPAN)")
-  if (tw$modif & !is.null (clusters))
-    if (max (clusters) > length (tw$twi)+1 || clusters < 2) stop (paste ("Values in argument 'clusters' must be between 2 and ", length (tw$twi)+1, ".", sep = ''))
-  twi <- tw$twi
-  if (!tw$modif) 
-    {
-    tab <- read.twi (twi)$table
-    cat ('TWO-WAY SORTED TABLE FROM TWINSPAN')
-    cat (tab, sep = '\n')
-    }
-  if (tw$modif) 
-    {
-    temp <- lapply (X = if (is.null (clusters)) 2:(length (twi)+2) else clusters, FUN = function (l) 
-    {
-      tab <- read.twi (twi[[l-1]])$table
-      cat (' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', sep = '\n')
-      cat (paste (' Modified TWINSPAN - step ',l-1, ' (', l,' clusters)', sep = ''), sep = '\n')
-      cat (tab, sep = '\n')
-    })
-    }
-}
-
-read.twi <- function (twi)
-{
-  separators <- which (twi %in% c(' \f', '\f Input parameters:'))
-  twi.temp <- list ()
-  twi.temp$reading.data <- twi [1:(separators[1])-1]
-  twi.temp$input.parameters <- twi [(separators[1]+1):(separators[2]-1)]
-  twi.temp$levels <- twi[(separators[2]+1):(separators[3]-1)]
-  twi.temp$table <- twi[(separators[3]+1):length (twi)]
-  return (twi.temp)
 }
 
 

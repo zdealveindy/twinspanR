@@ -30,7 +30,13 @@ twinspan(com, modif = F, cut.levels = c(0, 2, 5, 10, 20),
 \item{...}{Other (rarely used) TWINSPAN parameters passed into function \code{\link{create.tw.dat}}}
 }
 \value{
-\code{twinspan} returns object of the class \code{'tw'}, which has \code{plot} and \code{summary} methods.
+\code{twinspan} returns object of the class \code{'tw'}, which is a list with the following items:
+\itemize{
+\item \code{classif} data frame with three columns: \code{order} - sequential number of plot, \code{plot.no} - original number of plot (\code{row.names} in community matrix \code{com}), \code{class} - binomial code with hieararchical result of TWINSPAN classification.
+\item \code{twi} vector (if \code{modif = FALSE}) or list (if \code{modif = TRUE}) of complete machine-readable output of TWINSPAN algorithm read from *.TWI file. In case of modified TWINSPAN (\code{modif = TRUE}) it is a list with number of items equals to number of clusters.
+\item \code{spnames} data frame with two columns: \code{full.name} - full scientific species name (\code{names (com)}), \code{abbrev.name} - eight-digits abbreviation created by \code{make.cepnames} function from \code{vegan}.
+\item \code{modif} logical; was the result calculated using standard TWINSPAN (\code{modif = FALSE}) or its modified version (\code{modif = TRUE})?
+}
 }
 \description{
 Calculates TWINSPAN (TWo-way INdicator SPecies ANalaysis) and modified TWINSPAN
@@ -41,7 +47,7 @@ XXXXX
 \examples{
 data (danube)
 res <- twinspan (danube$spe, modif = TRUE, clusters = 4)
-k <- cutree.tw (res)
+k <- cut (res)
 dca <- decorana (danube$spe)
 par (mfrow = c(1,2))
 ordiplot (dca, type = 'n', display = 'si', main = 'Modified TWINSPAN')
@@ -64,6 +70,6 @@ Mark O. Hill wrote the original Fortran code and executable library \code{twinsp
 }
 }
 \seealso{
-\code{\link{cutree.tw}}, \code{\link{create.tw.dat}}
+\code{\link{cut.tw}}, \code{\link{create.tw.dat}}
 }
 
