@@ -19,12 +19,23 @@
 #' @export
 cut.tw <- function (x, level = NULL, clusters = NULL, long.output = F, ...)
 {
-  
-  if (is.null (level)) level <- max (unlist (lapply (as.character (x$classif$class), FUN = function (x) length (unlist (strsplit (x, split = ''))))))-1
+  max.level <- max (unlist (lapply (as.character (x$classif$class), FUN = function (x) length (unlist (strsplit (x, split = ''))))))-1 
+  if (!is.null (level) & (level < 0 || level > max.level)) stop (paste ("Argument 'level' must be in range between 0 and ", max.level, sep = ''))
+  if (!is.null (clusters) & x$modif & (clusters < 1 || clusters > (max.level + 1))) stop (paste ("Argument 'cluster' must be in range between 1 and ", max.level + 1, sep = ''))
+  if (!is.null (clusters) & !x$modif) warning ("Argument 'clusters' was ignored - applies only when the results come from modified TWINSPAN.")
+  if (!is.null (clusters) & x$modif) level <- clusters - 1
+  if (is.null (level)) level <- max.level
   tw.class.level <- as.factor (unlist (lapply (as.character (x$classif$class), FUN = function (x) substr (x, start = 1, stop = level + 1))))
   plot.no <- x$classif$plot.no
   group <- as.numeric (tw.class.level)
   class <- tw.class.level
   if (long.output) res <- as.data.frame (list (plot.no = plot.no, group = group, class = class)) else res <- group
   return (res)
+}
+
+cut.tw0 <- function (x, level = NULL, ...)
+{
+  tw.class.level <- as.factor (unlist (lapply (as.character (x$classif$class), FUN = function (x) substr (x, start = 1, stop = level + 1))))
+  group <- as.numeric (tw.class.level)
+  return (group)
 }

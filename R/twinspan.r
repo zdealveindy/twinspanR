@@ -12,6 +12,7 @@
 #' @param diss Dissimilarity used to calculate cluster heterogeneity (default = 'bray'); see Details for more information. Applies only for modified TWINSPAN (\code{modif = TRUE}).
 #' @param min.diss Minimum dissimilarity under which the cluster will not be divided further (default = NULL, which means that the stopping rule is based on number of clusters (parameter \code{clusters})). Currently not implemented.
 #' @param mean.median Should be the average dissimilarity of cluster calculated as mean or median of all between sample dissimilarities within the cluster? (default = \code{'mean'}, alternative is \code{'median'})
+#' @param object Object of the class \code{'tw'}.
 #' @param ... Other (rarely used) TWINSPAN parameters passed into function \code{\link{create.tw.dat}}
 #' @details XXXXX
 #' @return \code{twinspan} returns object of the class \code{'tw'}, which is a list with the following items:
@@ -55,6 +56,7 @@ twinspan <- function (com, modif = F, cut.levels = c(0,2,5,10,20), min.group.siz
  diss <- DISS[pmatch(diss, DISS)]
  com <- as.data.frame (com)
  species.names <- names (com)
+ tw.heter <- list ()
  names (com) <- vegan::make.cepnames (species.names)
  if (!modif) tw <- twinspan0 (com, cut.levels = cut.levels, min.group.size = min.group.size, levels = levels, ...)
  if (modif) 
@@ -79,6 +81,7 @@ twinspan <- function (com, modif = F, cut.levels = c(0,2,5,10,20), min.group.siz
     no.samples.per.group <- unlist (lapply (sort.by.heter, FUN = function (no) sum (tw.class.level == no)))
     which.most.heter <- sort.by.heter[no.samples.per.group >= min.group.size][1]
     tw.temp[[clusters.temp]] <- twinspan0 (com[tw.class.level == which.most.heter,], cut.levels = cut.levels, min.group.size = min.group.size, levels = 1)
+    tw.heter[[clusters.temp]] <- list (tw.class.level = sort(unique(tw.class.level)), cluster.heter = cluster.heter, no.samples.per.group = no.samples.per.group[sort.by.heter], which.most.heter = which.most.heter)
     groups01[,clusters.temp] <- groups01[,clusters.temp-1]
     groups01[tw.class.level == which.most.heter, clusters.temp] <- as.numeric (tw.temp[[clusters.temp]]$classif$class)-1
     clusters.temp <- clusters.temp + 1
@@ -90,6 +93,8 @@ twinspan <- function (com, modif = F, cut.levels = c(0,2,5,10,20), min.group.siz
  }
  tw$spnames <- as.data.frame (cbind (full.name = species.names, abbrev.name = vegan::make.cepnames (species.names)))
  tw$modif <- modif
+ tw$summary <- list (modif = modif, cut.levels = cut.levels, min.group.size = min.group.size, levels = levels, clusters = clusters, diss = diss, min.diss = min.diss, mean.median = mean.median, heter = tw.heter)
+ class (tw) <- 'tw'
  return (tw)
 }
 
@@ -109,9 +114,41 @@ twinspan0 <- function (com, cut.levels, min.group.size, levels, ...)
   if (length (scanned.PUN) == 0) res <- 0 else res <- scanned.PUN[10:(which (scanned.PUN == 'SPECIES')-1)]
   tw0 <- list ()
   tw0$classif <- as.data.frame (matrix (res, ncol = 4, byrow = T))[,-3]
-  tw0$twi <- scanned.TWI
   names (tw0$classif) <- c('order', 'plot.no', 'class')
-  class (tw0) <- c('tw')
+  tw0$twi <- scanned.TWI
+  class (tw0) <- c('tw0')
   setwd (actual.wd)
   return (tw0)
 }  
+
+#' @name twinspan
+#' @export
+summary.tw <- function (object, ...)
+{
+  if (!object$modif)
+  {
+    cat ('Standard TWINSPAN', spe = '\n\n')
+    cat ('Basic setting:\n')
+    cat (c('Pseudospecies cut levels: ', object$summary$cut.levels, '\n'))
+    cat (c('Minimum group size: ', object$summary$min.group.size, '\n'))
+    cat (c('Number of hierarchical levels: ', object$summary$levels, '\n'))
+  }
+  if (object$modif)
+  {
+    cat ('TWINSPAN modified according to Rolecek et al. (2009)', spe = '\n\n')
+    cat ('Basic setting:\n')
+    cat (c('Pseudospecies cut levels: ', object$summary$cut.levels, '\n'))
+    cat (c('Minimum group size: ', object$summary$min.group.size, '\n'))
+    cat (c('Required number of clusters: ', object$summary$clusters, '\n'))
+    cat (c('Dissimilarity measure: ', object$summary$diss, '\n'))
+    cat (c('Mean or median of dissimilarity calculated? ', object$summary$mean.median, '\n'))
+    cat (c('\nResults of modified TWINSPAN algorithm:\n'))
+    no_print <- lapply (object$summary$heter[-1], FUN = function (het) 
+    {
+      for_print <- rbind ('Cluster heterogeneity' = formatC(het$cluster.heter, format = 'f', digits = 3), 'No of samples' = formatC(het$no.samples.per.group))
+      colnames (for_print) <- paste ('CLUST', het$tw.class.level, sep = ' ')
+      print.default (for_print, quote = F, print.gap = 2, justify = 'right')
+      cat (c('Candidate cluster for next division: ', het$which.most.heter, '\n\n'))
+    })
+  }
+}

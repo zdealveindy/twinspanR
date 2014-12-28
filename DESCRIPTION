@@ -1,13 +1,10 @@
 Package: twinspan
 Type: Package
 Title: TWo-way INdicator SPecies ANalysis (and its modified version) in R.
-Version: 0.6
-Date: 2014-12-22
-Author: David Zeleny wrote the R library, which is a wrapper around twindll.dll library written
-    by M.O.Hill. 
+Version: 0.8
+Date: 2014-12-28
+Author: David Zeleny (R library), M.O.Hill (twindll.dll library)
 Maintainer: David Zeleny <zeleny.david@gmail.com>
 Description: This R library is basically just a wrapper around twinspan.exe file written by M.O.Hill (twindll.dll). 
-Depends: 
-  vegan,
-  rioja
+Depends: vegan, rioja
 License: GPL-2

@@ -2,6 +2,7 @@
 
 S3method(cut,tw)
 S3method(print,tw)
+S3method(summary,tw)
 export(create.tw.dat)
 export(twinspan)
 importFrom(rioja,write.CEP)
