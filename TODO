@@ -1,0 +1,13 @@
+TODO list
+
+Needs to fix:
+- summary function for modified TWINSPAN - Results may show also size and heterogeneity of the first (undivided) cluster, and of the final (divided) number of clusters
+- rewrite the "modified TWINSPAN" cycle in twinspan function - simplify it (e.g. create functions cluster.heterogeneity with arguments com, tw.class.level and diss, and function no.samples.per.group with argument tw.class.level) - this functions could be also applied on the first and the last step (before the first division and after the last division)
+
+
+Long term goals:
+- add plotting function to draw hierarchical trees (based on the binary codes returned by TWINSPAN and modified TWINSPAN) - but it's not that easy, could be put for later development
+- summary (or other) function could list indicator species for each split (it means to find these species in *.TWI output and format them for output)
+- solve the question of Licence - the package should be distributed with twinspan.exe, which is based on twindll.dll written by M.O.Hill and compiled by Petr Smilauer. Copyright for twindll.dll is owned by Centre for Hydrology and Ecology, where they write that distribution of the library is strictly prohibited
+
+meadow <- read.cep ('c:/Users/Zeleny/Dropbox/experimenty/R libraries/twinspan build files/twinspan frm centre for ecol hydr/MEADOW.CRN')

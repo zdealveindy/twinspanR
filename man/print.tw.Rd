@@ -40,8 +40,9 @@ Argument \code{what} can have the following values:
 data (danube)
 tw <- twinspan (danube$spe)
 print (tw, 'table')
-# The output of print function could be captured by "capture.output" function,
-# and writen into file using e.g. "write.table":
+
+## The output of print function could be captured by "capture.output" function,
+## and writen into a file using e.g. "write.table":
 \dontrun{
 write.table (file = 'table.txt', capture.output (print (tw, 'table')), quote = F, row.names = F)
 system (shell ('notepad.exe table.txt'))}
