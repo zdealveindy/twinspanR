@@ -6,4 +6,4 @@ This package implements the TWINSPAN classification method (Hill 1979) and it's 
 
 For more details, examples and tutorials, see http://davidzeleny.net/wiki/doku.php/twinspan:start.
 
-For some background thoughts, see my blog post here: XXXX.
+For some background thoughts, see the blog post here: XXXX.
