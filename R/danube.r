@@ -17,7 +17,7 @@
 #' \item \code{yield}	Hay yield [kgx100/ha]
 #' \item \code{veg.type}	Vegetation type (A, B, C or D, see details below)
 #' \item \code{Light, Temp, Cont, Moist, React, Nutr}	Mean Ellenberg indicator values for light, temperature, continentality, moisture, soil reaction and nutrients (calculated as mean of species indicator values not weighted by species biomass)}
-#' Vegetation types (variable \code{danube$env$veg.type}) are according to Table 9.7 in Mueller-Dombois & Ellenberg (1974). The codes A, B and C stands for:
+#' Vegetation types (variable \code{danube$env$veg.type}) are according to Table 9.7 in Mueller-Dombois & Ellenberg (1974). The codes A, B, C and D stands for:
 #' \itemize{
 #' \item A - \emph{Bromus-Arrhenatherum} community
 #' \item B - \emph{Geum-Arrhenatherum} community

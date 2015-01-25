@@ -1,7 +1,7 @@
 #' (Modified) TWINSPAN in R
 #' 
 #' Calculates TWINSPAN (TWo-way INdicator SPecies ANalaysis, Hill 1979) and its modified version according to Rolecek et al. (2009)
-#' @author Mark O. Hill wrote the original Fortran code, which has been adopted by Petr Šmilauer into dynamic library twindll.dll and executable program \code{twinspan.exe}; the R function maintaining communication between R and \code{twinspan.exe} was written by David Zeleny (zeleny.david@@gmail.com).
+#' @author Mark O. Hill wrote the original Fortran code, which has been adopted by Petr Smilauer into dynamic library twindll.dll and executable program \code{twinspan.exe}; the R function maintaining communication between R and \code{twinspan.exe} was written by David Zeleny (zeleny.david@@gmail.com).
 #' @name twinspan
 #' @param com Community data (\code{data.frame} or \code{matrix}).
 #' @param modif Should the modified TWINSPAN algorithm be used? (logical, value, default = FALSE, i.e. standard TWINSPAN)

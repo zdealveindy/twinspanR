@@ -49,7 +49,7 @@ twinspan(com, modif = F, cut.levels = c(0, 2, 5, 10, 20),
 }
 }
 \description{
-Calculates TWINSPAN (TWo-way INdicator SPecies ANalaysis) and modified TWINSPAN
+Calculates TWINSPAN (TWo-way INdicator SPecies ANalaysis, Hill 1979) and its modified version according to Rolecek et al. (2009)
 }
 \details{
 XXXXX
@@ -58,7 +58,8 @@ Arguments \code{show.output.on.console} and \code{quiet} regulates how 'verbal' 
 }
 \examples{
 ## Modified TWINSPAN on traditional Ellenberg's Danube meadow dataset, projected on DCA
-and compared with original classification into three vegetation types made by tabular sorting:
+## and compared with original classification into three vegetation types made by tabular sorting:
+library (twinspanR)
 library (vegan)
 data (danube)
 res <- twinspan (danube$spe, modif = TRUE, clusters = 4)
@@ -84,7 +85,7 @@ write.table (out, file = 'out.txt', quot = F, row.names = F) # writes output to 
 }
 }
 \author{
-Mark O. Hill wrote the original Fortran code and executable library \code{twinspan.exe}; the R function maintaining communication between R and \code{twinspan.exe} was written by David Zeleny (zeleny.david@gmail.com).
+Mark O. Hill wrote the original Fortran code, which has been adopted by Petr Smilauer into dynamic library twindll.dll and executable program \code{twinspan.exe}; the R function maintaining communication between R and \code{twinspan.exe} was written by David Zeleny (zeleny.david@gmail.com).
 }
 \references{
 \itemize{
