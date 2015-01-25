@@ -32,7 +32,7 @@
 #' }
 #' @examples
 #' ## Modified TWINSPAN on traditional Ellenberg's Danube meadow dataset, projected on DCA 
-#' and compared with original classification into three vegetation types made by tabular sorting:
+#' ## and compared with original classification into three vegetation types made by tabular sorting:
 #' library (vegan)
 #' data (danube)
 #' res <- twinspan (danube$spe, modif = TRUE, clusters = 4)
