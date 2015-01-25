@@ -104,12 +104,19 @@ twinspan <- function (com, modif = F, cut.levels = c(0,2,5,10,20), min.group.siz
     sort.by.heter <- sort (unique (tw.class.level))[order (cluster.heter,decreasing = T)]
     no.samples.per.group <- unlist (lapply (sort.by.heter, FUN = function (no) sum (tw.class.level == no)))
     which.most.heter <- sort.by.heter[no.samples.per.group >= min.group.size][1]
-    tw.temp[[clusters.temp]] <- twinspan0 (com[tw.class.level == which.most.heter,], cut.levels = cut.levels, min.group.size = min.group.size, levels = 1, show.output.on.console = show.output.on.console, quiet = quiet, ...)
     tw.heter[[clusters.temp]] <- list (tw.class.level = sort(unique(tw.class.level)), cluster.heter = cluster.heter, no.samples.per.group = no.samples.per.group[order (sort.by.heter)], which.most.heter = which.most.heter)
+    tw.temp[[clusters.temp]] <- twinspan0 (com[tw.class.level == which.most.heter,], cut.levels = cut.levels, min.group.size = min.group.size, levels = 1, show.output.on.console = show.output.on.console, quiet = quiet, ...)
     groups01[,clusters.temp] <- groups01[,clusters.temp-1]
     groups01[tw.class.level == which.most.heter, clusters.temp] <- as.numeric (tw.temp[[clusters.temp]]$classif$class)-1
     clusters.temp <- clusters.temp + 1
    }
+# for the last group (which is not going to be divided further)
+   tw.class.level <- as.numeric (as.factor (apply (groups01[, 1:clusters.temp-1, drop = F], 1, paste, collapse = '')))
+   cluster.heter <- cluster.heter.fun (com = com, tw.class.level = tw.class.level, diss = diss, mean.median = mean.median)
+   sort.by.heter <- sort (unique (tw.class.level))[order (cluster.heter,decreasing = T)]
+   no.samples.per.group <- unlist (lapply (sort.by.heter, FUN = function (no) sum (tw.class.level == no)))
+   which.most.heter <- sort.by.heter[no.samples.per.group >= min.group.size][1]
+   tw.heter[[clusters.temp]] <- list (tw.class.level = sort(unique(tw.class.level)), cluster.heter = cluster.heter, no.samples.per.group = no.samples.per.group[order (sort.by.heter)], which.most.heter = which.most.heter)
    res <- list (order = tw.temp[[1]]$classif$order, plot.no = tw.temp[[1]]$classif$plot.no, class = apply (groups01, 1, FUN = function (x) paste ('*', paste(x, collapse = ''), sep = '')))
    tw$classif <- as.data.frame (res)
    class (tw) <- c('tw')

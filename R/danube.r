@@ -12,11 +12,11 @@
 #' 
 #' Environmental variables include:
 #' \itemize{
-#' \item \code{area}  Releve area [m2]
-#' \item \code{openings}	Openings in vegetation [\% area]
-#' \item \code{yield}	Hay yield [kgx100/ha]
-#' \item \code{veg.type}	Vegetation type (A, B, C or D, see details below)
-#' \item \code{Light, Temp, Cont, Moist, React, Nutr}	Mean Ellenberg indicator values for light, temperature, continentality, moisture, soil reaction and nutrients (calculated as mean of species indicator values not weighted by species biomass)}
+#' \item  \code{area} Releve area [m2]
+#' \item  \code{openings}	 Openings in vegetation [\% area]
+#' \item  \code{yield}  Hay yield [kgx100/ha]
+#' \item  \code{veg.type}  Vegetation type (A, B, C or D, see details below)
+#' \item  \code{Light, Temp, Cont, Moist, React, Nutr}  Mean Ellenberg indicator values for light, temperature, continentality, moisture, soil reaction and nutrients (calculated as mean of species indicator values not weighted by species biomass)}
 #' Vegetation types (variable \code{danube$env$veg.type}) are according to Table 9.7 in Mueller-Dombois & Ellenberg (1974). The codes A, B, C and D stands for:
 #' \itemize{
 #' \item A - \emph{Bromus-Arrhenatherum} community
@@ -27,12 +27,12 @@
 #' @format
 #'  \code{danube} is a structured list with these items:
 #'  \itemize{
-#'  \item \code{spe} Compositional matrix of all species (sample x species, \% biomass)
-#'  \item \code{env} environmental (header) variables, including calculated mean Ellenberg indicator values
-#'  \item \code{ell} list of species Ellenberg indicator values for all species (species x indicator values, according to Ellenberg et al. 1992)}
+#'  \item  \code{spe}  Compositional matrix of all species (sample x species, \% biomass)
+#'  \item  \code{env}  environmental (header) variables, including calculated mean Ellenberg indicator values
+#'  \item  \code{ell}  list of species Ellenberg indicator values for all species (species x indicator values, according to Ellenberg et al. 1992)}
 #' @name danube
 #' @docType data
-#' @author Ellenberg (1956), Mueller-Dombois & Ellenberg (1974). Data used here comes from R package \code{dave} written by Otto Wildi (dataset \code{mveg}) with source citing also Mueller-Dombois & Ellenberg (1974). Species names have been changed from abbreviations used in \code{dave} into full names according to the Mueller-Dombois & Ellenberg (1974). 
+#' @author Ellenberg (1956), Mueller-Dombois & Ellenberg (1974). The dataset could be downloaded from \code{http://www.ceh.ac.uk/products/software/cehsoftware-decoranatwinspan.htm} as \code{MEADOW.CRN}. Data used here come from R package \code{dave} written by Otto Wildi (dataset \code{mveg}) with source citing also Mueller-Dombois & Ellenberg (1974). Species names have been changed from abbreviations used in \code{dave} into full names according to the Mueller-Dombois & Ellenberg (1974).  
 #' @references
 #' 
 #' Ellenberg H. (1956): Aufgaben und Methoden in der Vegetationskunde. In: H. Walter, Einfuhrung in die Phytologie IV/1, Stuttgart.
