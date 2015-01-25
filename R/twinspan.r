@@ -1,7 +1,7 @@
 #' (Modified) TWINSPAN in R
 #' 
-#' Calculates TWINSPAN (TWo-way INdicator SPecies ANalaysis) and modified TWINSPAN
-#' @author Mark O. Hill wrote the original Fortran code and executable library \code{twinspan.exe}; the R function maintaining communication between R and \code{twinspan.exe} was written by David Zeleny (zeleny.david@@gmail.com).
+#' Calculates TWINSPAN (TWo-way INdicator SPecies ANalaysis, Hill 1979) and its modified version according to Rolecek et al. (2009)
+#' @author Mark O. Hill wrote the original Fortran code, which has been adopted by Petr Šmilauer into dynamic library twindll.dll and executable program \code{twinspan.exe}; the R function maintaining communication between R and \code{twinspan.exe} was written by David Zeleny (zeleny.david@@gmail.com).
 #' @name twinspan
 #' @param com Community data (\code{data.frame} or \code{matrix}).
 #' @param modif Should the modified TWINSPAN algorithm be used? (logical, value, default = FALSE, i.e. standard TWINSPAN)
@@ -33,6 +33,7 @@
 #' @examples
 #' ## Modified TWINSPAN on traditional Ellenberg's Danube meadow dataset, projected on DCA 
 #' ## and compared with original classification into three vegetation types made by tabular sorting:
+#' library (twinspanR)
 #' library (vegan)
 #' data (danube)
 #' res <- twinspan (danube$spe, modif = TRUE, clusters = 4)
@@ -125,7 +126,7 @@ twinspan <- function (com, modif = F, cut.levels = c(0,2,5,10,20), min.group.siz
 twinspan0 <- function (com, cut.levels, min.group.size, levels, show.output.on.console, quiet, ...)
 {
   actual.wd <- getwd ()
-  setwd (paste (.libPaths (), '/twinspan/exec/', sep = ''))
+  setwd (paste (.libPaths (), '/twinspanR/exec/', sep = ''))
   if (is.integer (com[1,1])) com <- sapply (com, as.numeric)  # if the data frame contains integers instead of reals, it converts them to real (because of write.CEP in rioja can't handle integers)
   com <- com[,colSums (com) > 0]
   rioja::write.CEP (com, fName = 'tw.cc!') 
