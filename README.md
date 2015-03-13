@@ -12,9 +12,13 @@ For some background thoughts, see the blog post (not published yet).
 
 To install:
 
+```{r}
 install.packages ('devtools')
 devtools::install_github("zdealveindy/twinspanR")
+```
 
 and to run examples:
+```{r}
 library (twinspanR)
 example (twinspan)
+```
