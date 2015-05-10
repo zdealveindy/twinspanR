@@ -1,6 +1,6 @@
 # twinspanR
 
-###Author: David Zeleny, Stephan M. Hennekens, Petr Smilauer & Mark O. Hill
+###Authors: David Zeleny, Stephan M. Hennekens, Petr Smilauer & Mark O. Hill
 
 This package implements the TWINSPAN classification method (Hill 1979) and it's modified version (Rolecek et al. 2009) into R. Along to being a simple wrapper around twinspan.exe file compiled by Stephan M. Hennekens and later modified by Petr Smilauer (and based on original FORTRAN code written by Mark O. Hill), it contains also Ellenbergs dataset about Danube meadow vegetation (used as example in first TWINSPAN publication by Hill 1979).
 
