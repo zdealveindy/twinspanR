@@ -153,7 +153,8 @@ twinspan <- function (com, modif = F, cut.levels = c(0,2,5,10,20), min.group.siz
 twinspan0 <- function (com, cut.levels, min.group.size, levels, show.output.on.console, quiet, ...)
 {
   actual.wd <- getwd ()
-  setwd (paste (.libPaths (), '/twinspanR/exec/', sep = ''))
+#  setwd (paste (.libPaths (), '/twinspanR/exec/', sep = ''))
+  setwd (paste (find.package ('twinspanR'), '/exec/', sep = ''))
   if (is.integer (com[1,1])) com <- sapply (com, as.numeric)  # if the data frame contains integers instead of reals, it converts them to real (because of write.CEP in rioja can't handle integers)
   com <- com[,colSums (com) > 0]
   rioja::write.CEP (com, fName = 'tw.cc!') 
