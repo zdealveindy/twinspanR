@@ -1,10 +1,19 @@
 Package: twinspanR
 Type: Package
 Title: TWo-way INdicator SPecies ANalysis (and its modified version) in R.
-Version: 0.15
-Date: 2016-02-26
+Version: 0.16
+Date: 2016-05-18
 Author: David Zeleny, Petr Smilauer, Stephan M. Hennekens & Mark O. Hill
 Maintainer: David Zeleny <zeleny.david@gmail.com>
-Description: This R library is an R wrapper with added functionality (written by D. Zeleny) around twinspan.exe file. The source code for twinspan.exe is based on TWINSPAN algorithm introduced by Mark O. Hill; original FORTRAN code was compiled into twinspan.exe by Stephan M. Hennekens for the usi with his program MEGATAB (part of Turboveg), with later added modifications by Petr Smilauer (for program JUICE).
-Depends: vegan, rioja, betapart
+Description: This R library is an R wrapper with added functionality (written by
+    D. Zeleny) around twinspan.exe file. The source code for twinspan.exe is based
+    on TWINSPAN algorithm introduced by Mark O. Hill; original FORTRAN code was
+    compiled into twinspan.exe by Stephan M. Hennekens for the usi with his program
+    MEGATAB (part of Turboveg), with later added modifications by Petr Smilauer (for
+    program JUICE).
+Depends:
+    vegan,
+    rioja,
+    betapart
 License: GPL-2
+RoxygenNote: 5.0.1
