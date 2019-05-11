@@ -6,9 +6,10 @@
 \usage{
 create.tw.dat(input.file = "tw.cc!", omit.samples = -1,
   no.cut.levels = length(cut.levels), cut.levels = c(0, 2, 5, 10, 20),
-  min.group.size = 5, max.no.ind = 7, max.no.sp.table = 100, levels = 6,
-  long.output = 1, diagram = 0, machine.readable.output = 1,
-  pseudosp.weights = -1, indicator.potential = -1, ommited.species = -1,
+  min.group.size = 5, max.no.ind = 7, max.no.sp.table = 100,
+  levels = 6, long.output = 1, diagram = 0,
+  machine.readable.output = 1, pseudosp.weights = -1,
+  indicator.potential = -1, ommited.species = -1,
   samples.weights = -1, species.weights = -1)
 }
 \arguments{
@@ -53,4 +54,3 @@ Internal function used to generate file \code{tw.dat} file with parameters enter
 \author{
 David Zeleny (zeleny.david@gmail.com)
 }
-

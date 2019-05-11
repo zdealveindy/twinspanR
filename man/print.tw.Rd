@@ -50,4 +50,3 @@ system (shell ('notepad.exe table.txt'))}
 \seealso{
 \code{\link{summary.tw}}, \code{\link{twinspan}}
 }
-

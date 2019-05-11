@@ -36,9 +36,6 @@ Vegetation types (variable \code{danube$env$veg.type}) are according to Table 9.
 \item C - \emph{Cirsium-Arrhenatherum} community
 \item D - releve 19, which has been deleted from the original Ellenberg's table, since its composition is quite different (contains \emph{Arrhenatherum elatius} and \emph{Festuca pratensis}, but other dominant species are \emph{Phalaris arundinacea} and \emph{Glyceria fluitans})}
 }
-\author{
-Ellenberg (1956), Mueller-Dombois & Ellenberg (1974). The dataset could be downloaded from \code{http://www.ceh.ac.uk/products/software/cehsoftware-decoranatwinspan.htm} as \code{MEADOW.CRN}. Data used here come from R package \code{dave} written by Otto Wildi (dataset \code{mveg}) with source citing also Mueller-Dombois & Ellenberg (1974). Species names have been changed from abbreviations used in \code{dave} into full names according to the Mueller-Dombois & Ellenberg (1974).
-}
 \references{
 Ellenberg H. (1956): Aufgaben und Methoden in der Vegetationskunde. In: H. Walter, Einfuhrung in die Phytologie IV/1, Stuttgart.
 
@@ -50,4 +47,6 @@ Hill M.O. & Gauch H.G. (1980): Detrended correspondence analysis: An improved or
 
 Mueller-Dombois D. & Ellenberg H. (1974): \emph{Aims and Methods of Vegetation Ecology}. John Wiley & Sons, New York, Chichester, Brisbane, Toronto.
 }
-
+\author{
+Ellenberg (1956), Mueller-Dombois & Ellenberg (1974). The dataset could be downloaded from \code{http://www.ceh.ac.uk/products/software/cehsoftware-decoranatwinspan.htm} as \code{MEADOW.CRN}. Data used here come from R package \code{dave} written by Otto Wildi (dataset \code{mveg}) with source citing also Mueller-Dombois & Ellenberg (1974). Species names have been changed from abbreviations used in \code{dave} into full names according to the Mueller-Dombois & Ellenberg (1974).
+}

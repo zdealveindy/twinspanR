@@ -78,7 +78,8 @@
 #' }
 #' @seealso \code{\link{create.tw.dat}}, \code{\link{cut.tw}}, \code{\link{print.tw}}.
 
-#' @importFrom rioja write.CEP
+#' @importFrom riojaExtra write.CEP
+#' @importFrom stats median
 #' @importFrom vegan make.cepnames cca vegdist
 #' @export
 twinspan <- function (com, modif = F, cut.levels = c(0,2,5,10,20), min.group.size = 5, levels = 6, clusters = 5, diss = 'bray', min.diss = NULL, mean.median = 'mean', show.output.on.console = FALSE, quiet = TRUE, ...)
@@ -159,9 +160,9 @@ twinspan0 <- function (com, cut.levels, min.group.size, levels, show.output.on.c
   actual.wd <- getwd ()
 #  setwd (paste (.libPaths (), '/twinspanR/exec/', sep = ''))
   setwd (paste (find.package ('twinspanR'), '/exec/', sep = ''))
-  if (is.integer (com[1,1])) com <- sapply (com, as.numeric)  # if the data frame contains integers instead of reals, it converts them to real (because of write.CEP in rioja can't handle integers)
+  if (is.integer (com[1,1])) com <- sapply (com, as.numeric)  # if the data frame contains integers instead of reals, it converts them to real (because of write.CEP in riojaExtra can't handle integers)
   com <- com[,colSums (com) > 0]
-  rioja::write.CEP (com, fName = 'tw.cc!') 
+  riojaExtra::write.CEP (com, fName = 'tw.cc!') 
   create.tw.dat (cut.levels = cut.levels, min.group.size = min.group.size, levels = levels, ...)
   output <- shell ('tw.bat', intern = T)
   if (show.output.on.console) 

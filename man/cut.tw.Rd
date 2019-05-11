@@ -4,7 +4,8 @@
 \alias{cut.tw}
 \title{Cut a TWINSPAN tree into groups of data}
 \usage{
-\method{cut}{tw}(x, level = NULL, clusters = NULL, long.output = F, ...)
+\method{cut}{tw}(x, level = NULL, clusters = NULL, long.output = F,
+  ...)
 }
 \arguments{
 \item{x}{Object of the class \code{'tw'} created by the function \code{twinspan}.}
@@ -36,4 +37,3 @@ Argument \code{level} can be used for results of both standard and modified TWIN
 \author{
 David Zeleny (zeleny.david@gmail.com)
 }
-
