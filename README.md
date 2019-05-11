@@ -6,10 +6,11 @@ This package implements the TWINSPAN classification method (Hill 1979) and it's 
 
 For more details see the blog post (https://davidzeleny.wordpress.com/2015/05/10/twinspan-in-r/). For more examples and tutorials, see website for analysing community ecology data in R (http://www.davidzeleny.net/anadat-r/doku.php/en:hier-divisive).
 
-The library twinspanR can be installed from GitHub repository, using the function install_github from package devtools:
+The library twinspanR can be installed from GitHub repository, using the function install_github from package devtools. Prior to the installation, you need to manually install the packages riojaExtra from GitHub:
 
 ```{r}
-install.packages ('devtools')
+install.packages ('devtools') # if you don't have it installed yet
+devtools::install_github("nsj3/riojaExtra")
 devtools::install_github("zdealveindy/twinspanR")
 ```
 
