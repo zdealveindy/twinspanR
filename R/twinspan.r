@@ -81,6 +81,7 @@
 #' @importFrom riojaExtra write.CEP
 #' @importFrom stats median
 #' @importFrom vegan make.cepnames cca vegdist
+#' @importFrom betapart beta.multi
 #' @export
 twinspan <- function (com, modif = F, cut.levels = c(0,2,5,10,20), min.group.size = 5, levels = 6, clusters = 5, diss = 'bray', min.diss = NULL, mean.median = 'mean', show.output.on.console = FALSE, quiet = TRUE, ...)
 {
