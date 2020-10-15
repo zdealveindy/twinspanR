@@ -5,10 +5,20 @@
 \alias{summary.tw}
 \title{(Modified) TWINSPAN in R}
 \usage{
-twinspan(com, modif = F, cut.levels = c(0, 2, 5, 10, 20),
-  min.group.size = 5, levels = 6, clusters = 5, diss = "bray",
-  min.diss = NULL, mean.median = "mean",
-  show.output.on.console = FALSE, quiet = TRUE, ...)
+twinspan(
+  com,
+  modif = F,
+  cut.levels = c(0, 2, 5, 10, 20),
+  min.group.size = 5,
+  levels = 6,
+  clusters = 5,
+  diss = "bray",
+  min.diss = NULL,
+  mean.median = "mean",
+  show.output.on.console = FALSE,
+  quiet = TRUE,
+  ...
+)
 
 \method{summary}{tw}(object, ...)
 }
@@ -82,7 +92,7 @@ ordiplot (dca, type = 'n', display = 'si', main = 'Modified TWINSPAN')
 points (dca, col = k)
 for (i in c(1,2,4)) ordihull (dca, groups = k, show.group = i, col = i,
  draw = 'polygon', label = TRUE)
-ordiplot (dca, type = 'n', display = 'si', main = 'Original assignment\\n (Ellenberg 1954)')
+ordiplot (dca, type = 'n', display = 'si', main = 'Original assignment\n (Ellenberg 1954)')
 points (dca, col = danube$env$veg.type)
 for (i in c(1:3)) ordihull (dca, groups = danube$env$veg.type, 
  show.group = unique (danube$env$veg.type)[i], col = i,
@@ -92,7 +102,7 @@ for (i in c(1:3)) ordihull (dca, groups = danube$env$veg.type,
 \dontrun{
 out <- capture.output (tw <- twinspan (danube$spe, show.output.on.console = T))
 summary (tw)           # returns summary of twinspan algorithm
-cat (out, sep = '\\n')  # prints the captured output
+cat (out, sep = '\n')  # prints the captured output
 write.table (out, file = 'out.txt', quot = F, row.names = F) # writes output to 'out.txt' file
 }
 }

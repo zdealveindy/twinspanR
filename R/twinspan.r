@@ -133,7 +133,7 @@ twinspan <- function (com, modif = F, cut.levels = c(0,2,5,10,20), min.group.siz
     tw.heter[[clusters.temp]] <- list (tw.class.level = sort(unique(tw.class.level)), cluster.heter = cluster.heter, no.samples.per.group = no.samples.per.group[order (sort.by.heter)], which.most.heter = which.most.heter)
     tw.temp[[clusters.temp]] <- twinspan0 (com[tw.class.level == which.most.heter,], cut.levels = cut.levels, min.group.size = min.group.size, levels = 1, show.output.on.console = show.output.on.console, quiet = quiet, ...)
     groups01[,clusters.temp] <- groups01[,clusters.temp-1]
-    groups01[tw.class.level == which.most.heter, clusters.temp] <- as.numeric (tw.temp[[clusters.temp]]$classif$class)-1
+    groups01[tw.class.level == which.most.heter, clusters.temp] <- cut (tw.temp[[clusters.temp]], level = 1)-1
     clusters.temp <- clusters.temp + 1
    }
 # for the last group (which is not going to be divided further)

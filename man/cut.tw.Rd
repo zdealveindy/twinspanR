@@ -4,8 +4,7 @@
 \alias{cut.tw}
 \title{Cut a TWINSPAN tree into groups of data}
 \usage{
-\method{cut}{tw}(x, level = NULL, clusters = NULL, long.output = F,
-  ...)
+\method{cut}{tw}(x, level = NULL, clusters = NULL, long.output = F, ...)
 }
 \arguments{
 \item{x}{Object of the class \code{'tw'} created by the function \code{twinspan}.}

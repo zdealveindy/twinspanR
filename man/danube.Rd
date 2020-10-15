@@ -4,11 +4,13 @@
 \name{danube}
 \alias{danube}
 \title{Danube Meadow Dataset (Ellenberg)}
-\format{\code{danube} is a structured list with these items:
+\format{
+\code{danube} is a structured list with these items:
  \itemize{
  \item  \code{spe}  Compositional matrix of all species (sample x species, \% biomass)
  \item  \code{env}  environmental (header) variables, including calculated mean Ellenberg indicator values
- \item  \code{ell}  list of species Ellenberg indicator values for all species (species x indicator values, according to Ellenberg et al. 1992)}}
+ \item  \code{ell}  list of species Ellenberg indicator values for all species (species x indicator values, according to Ellenberg et al. 1992)}
+}
 \usage{
 data (danube)
 }

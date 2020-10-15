@@ -3,10 +3,9 @@
 \docType{package}
 \name{twinspanR}
 \alias{twinspanR}
-\alias{twinspanR-package}
 \title{TWo-way INdicator SPecies ANalaysis (R wrapper around twinspan.exe)}
 \description{
-TWo-way INdicator SPecies ANalaysis (R wrapper around twinspan.exe)
+Calculates TWINSPAN (classical and modified version)
 }
 \author{
 David Zeleny
