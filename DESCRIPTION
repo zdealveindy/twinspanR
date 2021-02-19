@@ -1,8 +1,8 @@
 Package: twinspanR
 Type: Package
 Title: TWo-way INdicator SPecies ANalysis (and its modified version) in R
-Version: 0.21
-Date: 2021-01-29
+Version: 0.22
+Date: 2021-02-19
 Author: David Zeleny
 Maintainer: David Zeleny <zeleny.david@gmail.com>
 Description: This R library is an R wrapper with added functionality (written by
