@@ -165,7 +165,15 @@ twinspan0 <- function (com, cut.levels, min.group.size, levels, show.output.on.c
   com <- com[,colSums (com) > 0]
   riojaExtra::write.CEP (com, fName = 'tw.cc!') 
   create.tw.dat (cut.levels = cut.levels, min.group.size = min.group.size, levels = levels, ...)
-  output <- shell ('tw.bat', intern = T)
+  if(.Platform$OS.type == "windows")
+  {
+    output <- shell ('tw.bat', intern = T)
+  }
+  else
+  {
+    output <- system('wine ./tw.bat', intern = T)
+  }
+
   if (show.output.on.console) 
   {
     output [output %in% ' \f'] <- '\n'
