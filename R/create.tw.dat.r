@@ -18,7 +18,7 @@
 #' @param ommited.species Numbers (not names) of species which should be omitted from the list of potential indicators.
 #' @param samples.weights Weights of samples.
 #' @param species.weights Weights of species.
-#' @return Creates file \code{tw.dat} in the subdirectory \code{exec} of the \code{twinspan} library folder. This file contains all parameters needed to setup the TWINSPAN algorithm, and is loaded into \code{twinspan.exe} together with the community data (reformated into condensed format and stored in \code{tw.cc!}).
+#' @return The path of \code{tw.dat} created in the current workspace. This file contains all parameters needed to setup the TWINSPAN algorithm, and is loaded into \code{twinspan.exe} together with the community data (reformated into condensed format and stored in \code{tw.cc!}).
 #' @export
 create.tw.dat <- function (input.file = 'tw.cc!', omit.samples = -1, no.cut.levels = length (cut.levels), cut.levels = c(0,2,5,10,20), min.group.size = 5, max.no.ind = 7, max.no.sp.table = 100, levels = 6, long.output = 1, diagram = 0, machine.readable.output = 1, pseudosp.weights = -1, indicator.potential = -1, ommited.species = -1, samples.weights = -1, species.weights = -1)
 {
@@ -40,4 +40,5 @@ create.tw.dat <- function (input.file = 'tw.cc!', omit.samples = -1, no.cut.leve
        samples.weights,
        species.weights,
        file = 'tw.dat', sep = '\n')
+  return (paste(getwd(), 'tw.dat', sep='/'))
 }

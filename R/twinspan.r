@@ -158,20 +158,26 @@ twinspan <- function (com, modif = F, cut.levels = c(0,2,5,10,20), min.group.siz
 
 twinspan0 <- function (com, cut.levels, min.group.size, levels, show.output.on.console, quiet, ...)
 {
-  actual.wd <- getwd ()
-#  setwd (paste (.libPaths (), '/twinspanR/exec/', sep = ''))
-  setwd (paste (find.package ('twinspanR'), '/exec/', sep = ''))
-  if (is.integer (com[1,1])) com <- sapply (com, as.numeric)  # if the data frame contains integers instead of reals, it converts them to real (because of write.CEP in riojaExtra can't handle integers)
+  # if the data frame contains integers instead of reals,
+  # it converts them to real (because of write.CEP in riojaExtra can't handle integers)
+  if (is.integer (com[1,1])) com <- sapply(com, as.numeric)
+  
   com <- com[,colSums (com) > 0]
   riojaExtra::write.CEP (com, fName = 'tw.cc!') 
-  create.tw.dat (cut.levels = cut.levels, min.group.size = min.group.size, levels = levels, ...)
+  
+  twdat_path <- create.tw.dat (cut.levels = cut.levels, min.group.size = min.group.size, levels = levels, ...)
+  tw_path <- paste(find.package('twinspanR'), 'exec', sep='/')
+  twbat_path <- paste(tw_path, 'tw.bat', sep = '/')
+
+  command <- paste(twbat_path, tw_path, sep = ' ')
+  command <- paste(command, twdat_path, sep = ' ')
   if(.Platform$OS.type == "windows")
   {
-    output <- shell ('tw.bat', intern = T)
+    output <- shell (command, intern = T)
   }
   else
   {
-    output <- system('wine ./tw.bat', intern = T)
+    output <- system(paste('wine', command, sep=' '), intern = T)
   }
 
   if (show.output.on.console) 
@@ -189,7 +195,7 @@ twinspan0 <- function (com, cut.levels, min.group.size, levels, show.output.on.c
   names (tw0$classif) <- c('order', 'plot.no', 'class')
   tw0$twi <- scanned.TWI
   class (tw0) <- c('tw0')
-  setwd (actual.wd)
+  
   return (tw0)
 }  
 
